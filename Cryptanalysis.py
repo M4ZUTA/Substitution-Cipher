@@ -2,14 +2,14 @@ def calculate_letter_frequencies(text):
     frequencies = {}
     letters_count = 0
 
-    # we are calculating the number of occurrence for each letter.
     for letter in text:
-        if letter.isalpha():
-            if frequencies.get(letter, None):
-                frequencies[letter] += 1
-            else:
-                frequencies[letter] = 1
+        if letter.isascii() and letter.isalpha():
+            letter = letter.upper()
+            frequencies[letter] = frequencies.get(letter, 0) + 1
             letters_count += 1
+
+    if not letters_count:
+        return {}
 
     for letter, count in frequencies.items():
         frequencies[letter] = count / letters_count
